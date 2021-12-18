@@ -1,9 +1,28 @@
-const env = process.env.NODE_ENV || 'development';
+const express = require('express');
+const hbs     = require('express-handlebars');
+const { catalog }  = require('./controllers/catalog.js');
+const { about }    = require('./controllers/about.js');
+const { details }  = require('./controllers/details.js');
+const { notFound } = require('./controllers/notFound.js');
+const { create, post }  = require('./controllers/create.js');
 
-const config = require('./config/config')[env];
-const app = require('express')();
+const app = express();
+const port = 3000;
 
-require('./config/express')(app);
-require('./config/routes')(app);
+app.engine('hbs', hbs({
+    extname: '.hbs'
+}));
 
-app.listen(config.port, console.log(`Listening on port ${config.port}! Now its up to you...`));
+app.set('view engine', 'hbs');
+
+app.use(express.static('static'));
+
+app.get('/', catalog);
+app.get('/about', about);
+app.get('/create', create);
+app.post('/create', post);
+app.get('/details/:id', details);
+
+app.all('*', notFound);
+
+app.listen(port, () => console.log('Server listening on port ' + port));
