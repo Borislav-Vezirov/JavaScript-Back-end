@@ -1,28 +1,38 @@
 const express = require('express');
 const hbs     = require('express-handlebars');
+
+const { init: storage } = require('./models/storage.js');
+
 const { catalog }  = require('./controllers/catalog.js');
 const { about }    = require('./controllers/about.js');
 const { details }  = require('./controllers/details.js');
 const { notFound } = require('./controllers/notFound.js');
 const { create, post }  = require('./controllers/create.js');
 
-const app = express();
-const port = 3000;
+start();
 
-app.engine('hbs', hbs({
-    extname: '.hbs'
-}));
+async function start(){
 
-app.set('view engine', 'hbs');
+    const app = express();
+    const port = 3000;
 
-app.use(express.static('static'));
+    app.engine('hbs', hbs({
+        extname: '.hbs'
+    }));
 
-app.get('/', catalog);
-app.get('/about', about);
-app.get('/create', create);
-app.post('/create', post);
-app.get('/details/:id', details);
+    app.set('view engine', 'hbs');
+    
+    app.use(express.static('static'));
+    app.use(await storage());
+    app.use(express.urlencoded({ extended: false }));
 
-app.all('*', notFound);
+    app.get('/', catalog);
+    app.get('/about', about);
+    app.get('/create', create);
+    app.post('/create', post);
+    app.get('/details/:id', details);
 
-app.listen(port, () => console.log('Server listening on port ' + port));
+    app.all('*', notFound);
+
+    app.listen(port, () => console.log('Server listening on port ' + port));
+}
