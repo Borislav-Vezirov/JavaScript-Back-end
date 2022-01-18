@@ -1,21 +1,31 @@
 const http = require('http');
+const fs   = require('fs');
+const express = require('express');
+const hbs = require('express-handlebars');
 
-const app = http.createServer((req, res) => {
 
-    switch (req.url) {
-        case '/':
-            res.write('<h1>Home Page</h1>');
-            break;
-        case '/cats':
-            res.write('<h1>Cats Page</h1>');
-            break;
+const app = express();
+app.engine('hbs', hbs.engine({ extname: 'hbs' }));
 
-        default:
-            res.write('<h1>Error 404</h1>')
-            break;
-    }
-    
-    res.end();
+app.set('view engine', 'hbs');
+
+app.use('/static', express.static('./static'));
+app.use(express.urlencoded({extended: true}));
+
+app.get('/', (req, res) => {
+    res.render('home/home');
+})
+
+app.get('/cats/add-breed', (req, res) => {
+
+    res.render('addBreed')
 });
+
+app.get('/cats/add-cat', (req, res) => {
+
+    res.render('addCat')
+});
+
+
 
 app.listen(3000, () => console.log('Server is starting on port http://localhost:3000'));
