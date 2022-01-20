@@ -12,6 +12,7 @@ app.set('view engine', 'hbs');
 app.use('/static', express.static('./static'));
 app.use(express.urlencoded({extended: true}));
 
+
 app.get('/', (req, res) => {
     res.render('home/home');
 })
@@ -21,9 +22,18 @@ app.get('/cats/add-breed', (req, res) => {
     res.render('addBreed')
 });
 
-app.get('/cats/add-cat', (req, res) => {
+app.get('/cats/add-cat/:catName?', (req, res) => {
 
-    res.render('addCat')
+    const catBreed = [
+        {breed: 'Persian'},
+        {breed: 'Angore'},
+        {breed: 'Siam'}
+    ];
+
+    res.render('addCat', {
+        name: req.params.catName,
+        catBreed
+    });
 });
 
 
