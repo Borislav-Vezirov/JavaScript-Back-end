@@ -1,6 +1,6 @@
 const express = require('express');
 const hbs  = require('express-handlebars');
-const path = require('path');
+
 
 
 const initHandlebars = (app) => {
@@ -10,6 +10,7 @@ const initHandlebars = (app) => {
     }));
 
     app.set('view engine', 'hbs');
+
 }
 
 module.exports = initHandlebars;
