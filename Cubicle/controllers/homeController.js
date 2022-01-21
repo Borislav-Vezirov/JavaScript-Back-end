@@ -12,6 +12,12 @@ const homePage = (req, res) => {
     });
 }
 
+const aboutPage = (req, res) => {
+
+    res.render('about');
+}
+
 router.get('/', homePage);
+router.get('/about', aboutPage);
 
 module.exports = router;
