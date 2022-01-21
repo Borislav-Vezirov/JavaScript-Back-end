@@ -13,6 +13,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "body-parser": "^1.19.1",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "uniqid": "^5.4.0"
