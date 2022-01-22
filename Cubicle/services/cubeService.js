@@ -20,6 +20,8 @@ const cubeDb = [
 
 const getAll = () => cubeDb.slice(); 
 
+const getCubeById = (id) => cubeDb.find(x => x.id == id);
+
 const create = (name, description, imageUrl, difficulty) => {
 
     let cube = new Cube(name, description, imageUrl, difficulty);
@@ -27,9 +29,11 @@ const create = (name, description, imageUrl, difficulty) => {
     cubeDb.push(cube);
 }
 
+
 const cubeService = {
     create,
-    getAll
+    getAll,
+    getCubeById
 }
 
 module.exports = cubeService;
