@@ -1,4 +1,8 @@
+{{#if title}}
 <h1>{{title}}</h1>
+{{else}}
+<h1>Browse</h1>
+{{/if}}
 <form action="/search" method="GET">
   <input type="text" class="search" name="search" value="{{search}}" placeholder="Search...">
   <input type="number" name="from" class="difficulty" value="{{from}}"placeholder="Difficulty from...">
