@@ -7,9 +7,7 @@ const homePage = async (req, res) => {
     
     let cubes = await cubeService.getAll();
 
-    res.render('index', {
-        cubes
-    });
+    res.render('index', { cubes });
 }
 
 const aboutPage = (req, res) => {
