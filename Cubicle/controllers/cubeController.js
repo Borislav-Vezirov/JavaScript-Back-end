@@ -30,5 +30,6 @@ const cubeDetails = async (req, res) => {
 router.get('/create', createPage);
 router.post('/create', createCube);
 router.get('/:cubeId', cubeDetails);
+router.get('/:cubeId/accessory/add', addAccessory);
 
 module.exports = router;
