@@ -5,9 +5,15 @@ async function create(name, description, imageUrl){
     return await Accessory.create({ name, description, imageUrl });
 }
 
+async function getAllAccessories(){
+
+    return await Accessory.find({}).lean();
+}
+
 const accessoryService = {
 
-    create
+    create,
+    getAllAccessories
 };
 
 module.exports = accessoryService;
