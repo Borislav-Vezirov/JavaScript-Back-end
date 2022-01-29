@@ -11,4 +11,11 @@ router.get('/add', async (req, res) => {
     res.render('attachAccessory', { ...cube, accessories });
 })
 
+router.post('/add', async (req, res) => {
+
+    await cubeService.attachAccessory(req.params.cubeId, req.body.accessory);
+
+    res.redirect(`/${req.params.cubeId}`);
+})
+
 module.exports = router;
