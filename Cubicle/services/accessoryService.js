@@ -10,10 +10,20 @@ async function getAllAccessories(){
     return await Accessory.find({}).lean();
 }
 
+async function getRemaining(accessoriesIds){
+
+    return await Accessory.find({
+        id: {
+            $nin: accessoriesIds
+        }
+    }).lean();
+}
+
 const accessoryService = {
 
     create,
-    getAllAccessories
+    getAllAccessories,
+    getRemaining
 };
 
 module.exports = accessoryService;
