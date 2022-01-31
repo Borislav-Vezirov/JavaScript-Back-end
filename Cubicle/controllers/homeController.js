@@ -15,11 +15,11 @@ const aboutPage = (req, res) => {
     res.render('about');
 }
 
-const searchBar = (req, res) => {
+const searchBar = async (req, res) => {
 
     const { search, from, to } = req.query;
 
-    const cubes = cubeService.searchLogic(search, from, to);
+    const cubes = await cubeService.searchLogic(search, from, to);
 
     res.render('index', { 
         cubes,

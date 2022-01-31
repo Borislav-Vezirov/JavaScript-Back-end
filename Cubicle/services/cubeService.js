@@ -27,9 +27,9 @@ const attachAccessory = async (cubeId, accessoryId) => {
   return cube.save();
 }
 
-const searchLogic = (text, from, to) => {
+const searchLogic = async (text, from, to) => {
 
-  let cubes = getAll();
+  let cubes = await getAll();
 
   if(text){
     cubes = cubes.filter(x => x.name.toLowerCase().includes(text.toLowerCase()));
