@@ -13,7 +13,7 @@ async function getAllAccessories(){
 async function getRemaining(accessoriesIds){
 
     return await Accessory.find({
-        id: {
+        _id: {
             $nin: accessoriesIds
         }
     }).lean();
