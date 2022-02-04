@@ -1,5 +1,4 @@
-const express = require('express');
-const router  = express.Router();
+const router  = require('express').Router();
 const cubeService = require('../services/cubeService.js');
 
 
@@ -33,5 +32,21 @@ const searchBar = async (req, res) => {
 router.get('/', homePage);
 router.get('/about', aboutPage);
 router.get('/search', searchBar);
+
+router.get('/login', (req, res) => {
+    
+    res.render('auth/login');
+});
+
+router.post('/login', (req, res) => {
+    
+
+    res.redirect('/');
+});
+
+router.get('/register', (req, res) => {
+    
+    res.render('auth/register');
+});
 
 module.exports = router;
