@@ -8,9 +8,26 @@ async function register(username, password) {
     return User.create({ username, password: hashedPassword });
 } 
 
+async function login(username, password){
+
+    const user =  await User.findOne({username});
+    const isValid = user ?  await bcrypt.compare(password, user.password) : undefined;
+    
+    try {
+        if(isValid){
+            return user;
+        }else{
+            throw new Error('Cannot find username or password');
+        }
+    } catch (error) {
+        console.log(error.message); 
+    }
+}
+
 
 const authService = {
-    register
+    register,
+    login
 }
 
 

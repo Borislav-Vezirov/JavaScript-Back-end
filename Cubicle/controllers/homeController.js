@@ -3,6 +3,7 @@ const authService = require('../services/authService.js');
 const cubeService = require('../services/cubeService.js');
 
 
+
 const homePage = async (req, res) => {
     
     let cubes = await cubeService.getAll();
@@ -39,10 +40,19 @@ router.get('/login', (req, res) => {
     res.render('auth/login');
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     
+    const { username, password } = req.body;
 
-    res.redirect('/');
+    const user = await authService.login(username, password);
+    try {
+        if(user){
+            res.redirect('/');
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+
 });
 
 router.get('/register', (req, res) => {
@@ -58,6 +68,7 @@ router.post('/register', async (req, res) => {
 
     res.redirect('/login');
 });
+
 
 
 module.exports = router;
