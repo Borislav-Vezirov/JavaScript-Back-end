@@ -21,6 +21,16 @@ const createCube = async (req, res) => {
     res.redirect('/');
 }
 
+const editPage = (req, res) => {
+
+    res.render('editPage');
+}
+
+const deletePage = (req, res) => {
+
+    res.render('deletePage');
+}
+
 const cubeDetails = async (req, res) => {
 
     const cube = await cubeService.getCubeById(req.params.cubeId);  
@@ -30,6 +40,8 @@ const cubeDetails = async (req, res) => {
 
 router.get('/create', createPage);
 router.post('/create', createCube);
+router.get('/:cubeId/edit', editPage);
+router.get('/:cubeId/delete', deletePage);
 router.get('/:cubeId', cubeDetails);
 router.use('/:cubeId/accessory/', accessoryAddController);
 
