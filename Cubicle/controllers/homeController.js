@@ -45,12 +45,11 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     const user = await authService.login(username, password);
-    try {
-        if(user){
-            res.redirect('/');
-        }
-    } catch (error) {
-        console.log(error.message);
+
+    if(user){
+        res.redirect('/');
+    }else{
+        res.redirect('/404');
     }
 
 });

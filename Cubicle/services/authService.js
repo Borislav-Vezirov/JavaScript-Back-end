@@ -1,5 +1,7 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {jwtSign, createToken} = require('../utils/authJwt.js');
 
 async function register(username, password) {
 
@@ -20,10 +22,9 @@ async function login(username, password){
             throw new Error('Cannot find username or password');
         }
     } catch (error) {
-        console.log(error.message); 
+       return undefined; 
     }
 }
-
 
 const authService = {
     register,
